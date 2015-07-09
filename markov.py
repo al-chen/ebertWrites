@@ -22,6 +22,7 @@ def mapText(text, prefix=2, dic={}):
 
 def getChain(dic, startWords=None, prefix=2):
 	minLength = 10
+	maxLength = 140
 	if not startWords:
 		startWords = [i for i in dic.keys() if i[0][0].isupper()]
 	ebertWrites = " ".join(random.choice(startWords))
@@ -30,11 +31,13 @@ def getChain(dic, startWords=None, prefix=2):
 		if pre in dic:
 			ebertWrites += " " + random.choice(dic[pre])
 		else:
-			if len(ebertWrites) > minLength:
+			if len(ebertWrites) > minLength and len(ebertWrites) <= maxLength:
 				break
-			getChain(dic, prefix)
-	# print ebertWrites
-	return ebertWrites
+			getChain(dic, prefix=prefix)
+	if len(ebertWrites) > minLength and len(ebertWrites) <= maxLength:
+		return ebertWrites
+	return getChain(dic, prefix=prefix)
+	# return ebertWrites
 
 def train(file_dic, prefix=2, txtname=None):
 	train_dic = {}
