@@ -21,7 +21,7 @@ def mapText(text, prefix=2, dic={}):
 	return dic
 
 def getChain(dic, startWords=None, prefix=2):
-	minLength = 10
+	minLength = 70
 	maxLength = 140
 	if not startWords:
 		startWords = [i for i in dic.keys() if i[0][0].isupper()]
@@ -86,14 +86,14 @@ if __name__ == '__main__':
 
 		locations = []
 		locations.append(".\\aclImdb\\train\\neg")
-		# locations.append(".\\aclImdb\\train\\pos")
+		locations.append(".\\aclImdb\\train\\pos")
 		# locations.append(".\\aclImdb\\train\\unsup")
 
 		for location in locations:
 			file_dic[location] = os.listdir(location)
-		filename = train(file_dic, prefix=2, txtname="neg_pre"+str(prefix)+".txt")
+		filename = train(file_dic, prefix=prefix, txtname="dic_pre"+str(prefix)+".txt")
 		# dic_pre2.txt
-	saveFile = "neg_pre"+str(prefix)+".txt"
+	saveFile = "dic_pre"+str(prefix)+".txt"
 	with open(saveFile, 'rb') as myFile:
 		dic = pickle.load(myFile)
 	print getChain(dic, prefix=prefix)
