@@ -50,12 +50,14 @@ def train(file_dic, prefix=2, txtname=None):
 	return txtname
 
 if __name__ == '__main__':
-	"""Example from local text file"""
-	f = open("DeclarationOfIndependence.txt", 'r')
-	doi_dic = mapText(f.read())
-	print getChain(doi_dic)
+	"""Example from local text file
+	"""
+	# f = open("DeclarationOfIndependence.txt", 'r')
+	# doi_dic = mapText(f.read())
+	# print getChain(doi_dic)
 
-	"""Example from online text file under Project Gutenberg License"""
+	"""Example from online text file under Project Gutenberg License
+	"""
 	# sample_url = "https://www.gutenberg.org/cache/epub/27827/pg27827.txt"
 	# text = urlopen(sample_url).read()
 	# dic = mapText(text, prefix=2, dic={})
@@ -72,23 +74,23 @@ if __name__ == '__main__':
 	address   = {Portland, Oregon, USA},
 	publisher = {Association for Computational Linguistics},
 	pages     = {142--150},
-	url       = {http://www.aclweb.org/anthology/P11-1015}}"""
-	
-	# train_bool = False
-	# prefix = 2
-	# if train_bool:
-	# 	file_dic = {}
+	url       = {http://www.aclweb.org/anthology/P11-1015}}
+	"""
+	train_bool = False
+	prefix = 2
+	if train_bool:
+		file_dic = {}
 
-	# 	locations = []
-	# 	locations.append(".\\aclImdb\\train\\neg")
-	# 	locations.append(".\\aclImdb\\train\\pos")
-	# 	# locations.append(".\\aclImdb\\train\\unsup")
+		locations = []
+		locations.append(".\\aclImdb\\train\\neg")
+		# locations.append(".\\aclImdb\\train\\pos")
+		# locations.append(".\\aclImdb\\train\\unsup")
 
-	# 	for location in locations:
-	# 		file_dic[location] = os.listdir(location)
-	# 	filename = train(file_dic, prefix=2, txtname=None)
-	# 	# dic_pre2.txt
-	# saveFile = "dic_pre2.txt"
-	# with open(saveFile, 'rb') as myFile:
-	# 	dic = pickle.load(myFile)
-	# print getChain(dic, prefix=prefix)
+		for location in locations:
+			file_dic[location] = os.listdir(location)
+		filename = train(file_dic, prefix=2, txtname="neg_pre"+str(prefix)+".txt")
+		# dic_pre2.txt
+	saveFile = "neg_pre"+str(prefix)+".txt"
+	with open(saveFile, 'rb') as myFile:
+		dic = pickle.load(myFile)
+	print getChain(dic, prefix=prefix)
