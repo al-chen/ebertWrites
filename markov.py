@@ -31,9 +31,10 @@ def getChain(dic, startWords=None, prefix=2):
 		if pre in dic:
 			ebertWrites += " " + random.choice(dic[pre])
 		else:
-			if len(ebertWrites) > minLength and len(ebertWrites) <= maxLength:
-				break
-			getChain(dic, prefix=prefix)
+			break
+			# if len(ebertWrites) > minLength and len(ebertWrites) <= maxLength:
+			# 	break
+			# getChain(dic, prefix=prefix)
 	if len(ebertWrites) > minLength and len(ebertWrites) <= maxLength:
 		return ebertWrites
 	return getChain(dic, prefix=prefix)
@@ -55,9 +56,9 @@ def train(file_dic, prefix=2, txtname=None):
 if __name__ == '__main__':
 	"""Example from local text file
 	"""
-	# f = open("DeclarationOfIndependence.txt", 'r')
-	# doi_dic = mapText(f.read())
-	# print getChain(doi_dic)
+	f = open("DeclarationOfIndependence.txt", 'r')
+	doi_dic = mapText(f.read())
+	print getChain(doi_dic)
 
 	"""Example from online text file under Project Gutenberg License
 	"""
@@ -79,21 +80,21 @@ if __name__ == '__main__':
 	pages     = {142--150},
 	url       = {http://www.aclweb.org/anthology/P11-1015}}
 	"""
-	train_bool = False
-	prefix = 2
-	if train_bool:
-		file_dic = {}
+	# train_bool = False
+	# prefix = 2
+	# if train_bool:
+	# 	file_dic = {}
 
-		locations = []
-		locations.append(".\\aclImdb\\train\\neg")
-		locations.append(".\\aclImdb\\train\\pos")
-		# locations.append(".\\aclImdb\\train\\unsup")
+	# 	locations = []
+	# 	locations.append(".\\aclImdb\\train\\neg")
+	# 	locations.append(".\\aclImdb\\train\\pos")
+	# 	# locations.append(".\\aclImdb\\train\\unsup")
 
-		for location in locations:
-			file_dic[location] = os.listdir(location)
-		filename = train(file_dic, prefix=prefix, txtname="dic_pre"+str(prefix)+".txt")
-		# dic_pre2.txt
-	saveFile = "dic_pre"+str(prefix)+".txt"
-	with open(saveFile, 'rb') as myFile:
-		dic = pickle.load(myFile)
-	print getChain(dic, prefix=prefix)
+	# 	for location in locations:
+	# 		file_dic[location] = os.listdir(location)
+	# 	filename = train(file_dic, prefix=prefix, txtname="dic_pre"+str(prefix)+".txt")
+	# 	# dic_pre2.txt
+	# saveFile = "dic_pre"+str(prefix)+".txt"
+	# with open(saveFile, 'rb') as myFile:
+	# 	dic = pickle.load(myFile)
+	# print getChain(dic, prefix=prefix)
